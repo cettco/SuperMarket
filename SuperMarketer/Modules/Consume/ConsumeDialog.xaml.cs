@@ -15,28 +15,28 @@ using System.Windows.Shapes;
 namespace SuperMarketer
 {
     /// <summary>
-    /// StockDialog.xaml 的交互逻辑
+    /// ConsumeDialog.xaml 的交互逻辑
     /// </summary>
-    public partial class StockDialog : Window
+    public partial class ConsumeDialog : Window
     {
         StoreDBEntities db = ((App)Application.Current).MainDb;
         //if initialized with findmode true, it refers to a query and will create a query instead of an item.
         bool isFindMode = false;
 
-        public StockDialog(bool isFindMode)
+        public ConsumeDialog(bool isFindMode)
         {
             InitializeComponent();
             this.isFindMode = isFindMode;
 
             //load values of the selected item(when modifying an item).
-            Stock item = Application.Current.Properties["StockModifyItem"] as Stock;
+            Consume item = Application.Current.Properties["ConsumeModifyItem"] as Consume;
             if (item != null)
             {
                 txbMerchID.IsEnabled = false;
                 txbMerchID.Text = item.MerchID.ToString();
-                txbVenderID.Text = item.VendorID.ToString();
-                txbStockDate.Text = item.StockDate.ToString();
-                txbStockQuantity.Text = item.StockQuantity.ToString();
+                txbMemID.Text = item.MemID.ToString();
+                txbConsumeDate.SelectedDate= item.ConDate;
+                txbConsumeQuantity.Text = item.ConAmount.ToString();
             }
         }
 
@@ -78,12 +78,12 @@ namespace SuperMarketer
             }
         }
 
-        private void txbStockDate_LostFocus(object sender, RoutedEventArgs e)
+        private void txbConsumeDate_LostFocus(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void txbStockQuantity_LostFocus(object sender, RoutedEventArgs e)
+        private void txbConsumeQuantity_LostFocus(object sender, RoutedEventArgs e)
         {
             //simple validation.
             if (isFindMode)
@@ -110,33 +110,33 @@ namespace SuperMarketer
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
             //clear dialog-result properties.
-            Application.Current.Properties["StockDialogQuery"] = null;
-            Application.Current.Properties["StockDialogItem"] = null;
+            Application.Current.Properties["ConsumeDialogQuery"] = null;
+            Application.Current.Properties["ConsumeDialogItem"] = null;
 
             //create a query in order to execute in findmode.
             if (isFindMode)
             {
-                int parseMerchID, parseVenderID, parseStockQuantity;
-                DateTime? parseStockDate;
-                bool bMerchID, bVenderID, bStockQuantity;
+                int parseMerchID, parseVenderID, parseConsumeQuantity;
+                DateTime? parseConsumeDate;
+                bool bMerchID, bVenderID, bConsumeQuantity;
                 //record whether parsing succeeds or not.
                 bMerchID = int.TryParse(txbMerchID.Text, out parseMerchID);
-                bVenderID = int.TryParse(txbVenderID.Text, out parseVenderID);
-                parseStockDate = txbStockDate.SelectedDate;
-                //bStockDate = int.TryParse(txbStockDate.Text, out parseStockDate);
-                bStockQuantity = int.TryParse(txbStockQuantity.Text, out parseStockQuantity);
+                bVenderID = int.TryParse(txbMemID.Text, out parseVenderID);
+                parseConsumeDate = txbConsumeDate.SelectedDate;
+                //bConsumeDate = int.TryParse(txbConsumeDate.Text, out parseConsumeDate);
+                bConsumeQuantity = int.TryParse(txbConsumeQuantity.Text, out parseConsumeQuantity);
 
                 //create query. note the use of (p?a:b) expressions. 
                 //if parsing failed, ignore that predicate(in other words, (&& true)).
-                var query = from Stock in db.Stocks
-                            where (bMerchID ? Stock.MerchID == parseMerchID : true)
-                            && (bVenderID ? Stock.VendorID == parseVenderID : true)
-                            && (parseStockDate != null ? Stock.StockDate == parseStockDate : true)
-                            && (bStockQuantity ? Stock.StockQuantity == parseStockQuantity : true)
-                            select Stock;
+                var query = from Consume in db.Consumes
+                            where (bMerchID ? Consume.MerchID == parseMerchID : true)
+                            && (bVenderID ? Consume.MemID == parseVenderID : true)
+                            && (parseConsumeDate != null ? Consume.ConDate == parseConsumeDate : true)
+                            && (bConsumeQuantity ? Consume.ConAmount == parseConsumeQuantity : true)
+                            select Consume;
 
                 //save the query into application properties in order to be fetched by the dialog-caller.
-                Application.Current.Properties["StockDialogQuery"] = query;
+                Application.Current.Properties["ConsumeDialogQuery"] = query;
                 this.Close();
             }
             else
@@ -147,27 +147,27 @@ namespace SuperMarketer
 
                     //parse and create prototype item.
                     int parseMerchID = int.Parse(txbMerchID.Text);
-                    int parseVenderID = int.Parse(txbVenderID.Text);
-                    int parseStockQuantity = int.Parse(txbStockQuantity.Text);
-                    DateTime? parseStockDate = txbStockDate.SelectedDate;
+                    int parseVenderID = int.Parse(txbMemID.Text);
+                    int parseConsumeQuantity = int.Parse(txbConsumeQuantity.Text);
+                    DateTime? parseConsumeDate = txbConsumeDate.SelectedDate;
 
-                    Stock item = new Stock()
+                    Consume item = new Consume()
                     {
                         MerchID = parseMerchID,
-                        VendorID = parseVenderID,
-                        StockQuantity = parseStockQuantity,
-                        StockDate = parseStockDate,
+                        MemID = parseVenderID,
+                        ConAmount = parseConsumeQuantity,
+                        ConDate = parseConsumeDate,
                     };
 
                     //save into app properties.
-                    Application.Current.Properties["StockDialogItem"] = item;
+                    Application.Current.Properties["ConsumeDialogItem"] = item;
                     //close the dialog.
                     this.Close();
                 }
                 catch (Exception exc)
                 {
                     //error message if parsing failed, and the dialog will not be closed(waits for correction).
-                    Application.Current.Properties["StockDialogItem"] = null;
+                    Application.Current.Properties["ConsumeDialogItem"] = null;
                     MessageBox.Show(exc.Message, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
