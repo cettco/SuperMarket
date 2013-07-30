@@ -1,0 +1,45 @@
+﻿<Window x:Class="SuperMarketer.StaffDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="员工个人信息" Height="500" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="员工编号：" Grid.Column="0" Grid.Row="0" FontSize="16"></Label>
+        <Label Content="连锁店编号：" Grid.Column="0" Grid.Row="1" FontSize="16"></Label>
+        <Label Content="员工姓名：" Grid.Column="0" Grid.Row="2" FontSize="16"></Label>
+        <Label Content="员工性别：" Grid.Column="0" Grid.Row="3" FontSize="16"></Label>
+        <Label Content="员工年龄：" Grid.Column="0" Grid.Row="4" FontSize="16"></Label>
+        <Label Content="员工工资：" Grid.Column="0" Grid.Row="5" FontSize="16"></Label>
+        <Label Content="员工住址：" Grid.Column="0" Grid.Row="6" FontSize="16"></Label>
+        <Label Content="员工电话号码：" Grid.Column="0" Grid.Row="7" FontSize="16"></Label>
+        <TextBox Name="txbStaffID" Grid.Column="1" Grid.Row="0" Margin="0,4,0,8" Width="140" LostFocus="txbStaffID_LostFocus"/>
+        <TextBox Name="txbStoreID" Grid.Column="1" Grid.Row="1" Margin="0,4,0,8" Width="140" LostFocus="txbStoreID_LostFocus"/>
+        <TextBox Name="txbStaffName" MaxLength="100" Grid.Column="1" Grid.Row="2" Margin="0,4,0,8" Width="140" LostFocus="txbStaffName_LostFocus"/>
+        <ComboBox Name="cmbStaffGender" Grid.Column="1" Grid.Row="3" Margin="0,4,0,8" Width="140">
+            <ComboBoxItem Background="#FF3C4EFF" Content="M"/>
+            <ComboBoxItem Background="#FFFF79E1" Content="F"/>
+        </ComboBox>
+        <TextBox Name="txbStaffAge" Grid.Column="1" Grid.Row="4" Margin="0,4,0,8" Width="140" LostFocus="txbStaffAge_LostFocus"/>
+        <TextBox Name="txbStaffWage" Grid.Column="1" Grid.Row="5" Margin="0,4,0,8" Width="140" LostFocus="txbStaffWage_LostFocus"/>
+        <TextBox Name="txbStaffAddr" MaxLength="300" Grid.Column="1" Grid.Row="6" Margin="0,4,0,8" Width="140" LostFocus="txbStaffAddr_LostFocus"/>
+        <TextBox Name="txbStaffPhoneNO" Grid.Column="1" Grid.Row="7" Margin="0,4,0,8" Width="140" LostFocus="txbStaffPhoneNO_LostFocus"/>
+        <Button Name="btnCancel" Content="取消" Grid.Column="0" Grid.Row="9" Click="btnCancel_Click"/>
+        <Button Name="btnSubmit" Content="提交" Grid.Column="1" Grid.Row="9" Click="btnSubmit_Click"/>
+        <Separator Grid.Row="8" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

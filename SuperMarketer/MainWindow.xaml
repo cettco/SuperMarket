@@ -1,0 +1,26 @@
+﻿<Window x:Class="SuperMarketer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="超市信息管理系统 Ver0.1" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button Name="btnStore" Content="连锁店管理" Click="btnStore_Click" Grid.Row="0" Grid.Column="0"></Button>
+        <Button Name="btnVendor" Content="供应商管理" Click="btnVendor_Click" Grid.Row="0" Grid.Column="1"></Button>
+        <Button Name="btnStaff" Content="员工管理" Click="btnStaff_Click" Grid.Row="0" Grid.Column="2"></Button>
+        <Button Name="btnStock" Content="进货管理" Click="btnStock_Click" Grid.Row="1" Grid.Column="0"></Button>
+        <Button Name="btnInventory" Content="库存管理" Click="btnInventory_Click" Grid.Row="1" Grid.Column="1"></Button>
+        <Button Name="btnConsume" Content="销售管理" Click="btnConsume_Click" Grid.Row="1" Grid.Column="2"></Button>
+        <Button Name="btnMerchandise" Content="商品信息管理" Click="btnMerchandise_Click" Grid.Row="2" Grid.Column="0"></Button>
+        <Button Name="btnMember" Content="顾客会员管理" Click="btnMember_Click" Grid.Row="2" Grid.Column="1"></Button>
+        <Button Name="btnLogio" Content="系统/登入登出" Click="btnLogio_Click" Grid.Row="2" Grid.Column="2"></Button>
+    </Grid>
+</Window>

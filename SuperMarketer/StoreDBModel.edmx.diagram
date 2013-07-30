@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9cb3d85d816146faa3e343b83c771fdb" Name="关系图1">
+        <EntityTypeShape EntityType="StoreDBModel.ChainStore" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Consume" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Inventory" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Member" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Merchandise" Width="1.5" PointX="6" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Staff" Width="1.5" PointX="3" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Stock" Width="1.5" PointX="8.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Vendor" Width="1.5" PointX="3.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="StoreDBModel.Work" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <AssociationConnector Association="StoreDBModel.FK__Inventory__Store__21B6055D" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Merchandi__Store__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Staff__StoreID__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Work__StoreID__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Consume__MemID__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Consume__MerchID__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Inventory__Merch__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Merchandi__Vendo__182C9B23" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Stock__MerchID__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Work__StaffID__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="StoreDBModel.FK__Stock__VendorID__29572725" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,30 @@
+﻿<Window x:Class="SuperMarketer.ChainstoreDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="连锁店信息" Height="300" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="连锁店编号：" Grid.Column="0" Grid.Row="0" FontSize="16"></Label>
+        <Label Content="连锁店地址：" Grid.Column="0" Grid.Row="1" FontSize="16"></Label>
+        <Label Content="连锁店电话号码：" Grid.Column="0" Grid.Row="2" FontSize="16"></Label>
+        <Label Content="员工数量：" Grid.Column="0" Grid.Row="3" FontSize="16"></Label>
+        <TextBox Name="txbStoreID" Grid.Column="1" Grid.Row="0" Margin="0,4,0,8" Width="140" LostFocus="txbStoreID_LostFocus"/>
+        <TextBox Name="txbStoreAddr" MaxLength="300" Grid.Column="1" Grid.Row="1" Margin="0,4,0,8" Width="140" LostFocus="txbStoreAddr_LostFocus"/>
+        <TextBox Name="txbStorePhoneNO" Grid.Column="1" Grid.Row="2" Margin="0,4,0,8" Width="140" LostFocus="txbStorePhoneNO_LostFocus"/>
+        <TextBox Name="txbStaffQuantity" Grid.Column="1" Grid.Row="3" Margin="0,4,0,8" Width="140" LostFocus="txbStaffQuantity_LostFocus"/>
+        <Separator Grid.Row="4" Grid.ColumnSpan="2"></Separator>
+        <Button Name="btnCancel" Content="取消" Grid.Column="0" Grid.Row="5" Click="btnCancel_Click"></Button>
+        <Button Name="btnSubmit" Content="提交" Grid.Column="1" Grid.Row="5" Click="btnSubmit_Click"></Button>
+    </Grid>
+</Window>

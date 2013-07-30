@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StoreDBModelStoreContainer" CdmEntityContainer="StoreDBEntities">
+    <EntitySetMapping Name="ChainStores">
+      <EntityTypeMapping TypeName="StoreDBModel.ChainStore">
+        <MappingFragment StoreEntitySet="ChainStore">
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="StoreAddr" ColumnName="StoreAddr" />
+          <ScalarProperty Name="StorePhoneNO" ColumnName="StorePhoneNO" />
+          <ScalarProperty Name="StaffQuantity" ColumnName="StaffQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consumes">
+      <EntityTypeMapping TypeName="StoreDBModel.Consume">
+        <MappingFragment StoreEntitySet="Consume">
+          <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+          <ScalarProperty Name="MemID" ColumnName="MemID" />
+          <ScalarProperty Name="ConDate" ColumnName="ConDate" />
+          <ScalarProperty Name="ConAmount" ColumnName="ConAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="StoreDBModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventory">
+          <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="InvenQuantity" ColumnName="InvenQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <EntityTypeMapping TypeName="StoreDBModel.Member">
+        <MappingFragment StoreEntitySet="Member">
+          <ScalarProperty Name="MemID" ColumnName="MemID" />
+          <ScalarProperty Name="MemName" ColumnName="MemName" />
+          <ScalarProperty Name="MemGender" ColumnName="MemGender" />
+          <ScalarProperty Name="MemAddr" ColumnName="MemAddr" />
+          <ScalarProperty Name="MemPhoneNO" ColumnName="MemPhoneNO" />
+          <ScalarProperty Name="CardNO" ColumnName="CardNO" />
+          <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Merchandises">
+      <EntityTypeMapping TypeName="StoreDBModel.Merchandise">
+        <MappingFragment StoreEntitySet="Merchandise">
+          <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+          <ScalarProperty Name="MerchName" ColumnName="MerchName" />
+          <ScalarProperty Name="MerchPrice" ColumnName="MerchPrice" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="PromotionPrice" ColumnName="PromotionPrice" />
+          <ScalarProperty Name="PromotionDateS" ColumnName="PromotionDateS" />
+          <ScalarProperty Name="PromotionDateE" ColumnName="PromotionDateE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="StoreDBModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="StaffGender" ColumnName="StaffGender" />
+          <ScalarProperty Name="StaffAge" ColumnName="StaffAge" />
+          <ScalarProperty Name="StaffWage" ColumnName="StaffWage" />
+          <ScalarProperty Name="StaffAddr" ColumnName="StaffAddr" />
+          <ScalarProperty Name="StaffPhoneNO" ColumnName="StaffPhoneNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Stocks">
+      <EntityTypeMapping TypeName="StoreDBModel.Stock">
+        <MappingFragment StoreEntitySet="Stock">
+          <ScalarProperty Name="MerchID" ColumnName="MerchID" />
+          <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+          <ScalarProperty Name="StockDate" ColumnName="StockDate" />
+          <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="StoreDBModel.Vendor">
+        <MappingFragment StoreEntitySet="Vendor">
+          <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+          <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+          <ScalarProperty Name="VendorAddr" ColumnName="VendorAddr" />
+          <ScalarProperty Name="VendorPhoneNO" ColumnName="VendorPhoneNO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Works">
+      <EntityTypeMapping TypeName="StoreDBModel.Work">
+        <MappingFragment StoreEntitySet="Work">
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="AwardsRecords" ColumnName="AwardsRecords" />
+          <ScalarProperty Name="PunishmentRecords" ColumnName="PunishmentRecords" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

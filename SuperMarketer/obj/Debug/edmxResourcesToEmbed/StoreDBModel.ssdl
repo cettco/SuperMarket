@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StoreDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="StoreDBModelStoreContainer">
+    <EntitySet Name="ChainStore" EntityType="StoreDBModel.Store.ChainStore" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Consume" EntityType="StoreDBModel.Store.Consume" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Inventory" EntityType="StoreDBModel.Store.Inventory" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Member" EntityType="StoreDBModel.Store.Member" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Merchandise" EntityType="StoreDBModel.Store.Merchandise" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Staff" EntityType="StoreDBModel.Store.Staff" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stock" EntityType="StoreDBModel.Store.Stock" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendor" EntityType="StoreDBModel.Store.Vendor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Work" EntityType="StoreDBModel.Store.Work" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK__Consume__MemID__25869641" Association="StoreDBModel.Store.FK__Consume__MemID__25869641">
+      <End Role="Member" EntitySet="Member" />
+      <End Role="Consume" EntitySet="Consume" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Consume__MerchID__24927208" Association="StoreDBModel.Store.FK__Consume__MerchID__24927208">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Consume" EntitySet="Consume" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Merch__20C1E124" Association="StoreDBModel.Store.FK__Inventory__Merch__20C1E124">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Inventory__Store__21B6055D" Association="StoreDBModel.Store.FK__Inventory__Store__21B6055D">
+      <End Role="ChainStore" EntitySet="ChainStore" />
+      <End Role="Inventory" EntitySet="Inventory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Merchandi__Store__173876EA" Association="StoreDBModel.Store.FK__Merchandi__Store__173876EA">
+      <End Role="ChainStore" EntitySet="ChainStore" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Merchandi__Vendo__182C9B23" Association="StoreDBModel.Store.FK__Merchandi__Vendo__182C9B23">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="Merchandise" EntitySet="Merchandise" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__StoreID__1273C1CD" Association="StoreDBModel.Store.FK__Staff__StoreID__1273C1CD">
+      <End Role="ChainStore" EntitySet="ChainStore" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stock__MerchID__286302EC" Association="StoreDBModel.Store.FK__Stock__MerchID__286302EC">
+      <End Role="Merchandise" EntitySet="Merchandise" />
+      <End Role="Stock" EntitySet="Stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Stock__VendorID__29572725" Association="StoreDBModel.Store.FK__Stock__VendorID__29572725">
+      <End Role="Vendor" EntitySet="Vendor" />
+      <End Role="Stock" EntitySet="Stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Work__StaffID__1CF15040" Association="StoreDBModel.Store.FK__Work__StaffID__1CF15040">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Work__StoreID__1DE57479" Association="StoreDBModel.Store.FK__Work__StoreID__1DE57479">
+      <End Role="ChainStore" EntitySet="ChainStore" />
+      <End Role="Work" EntitySet="Work" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ChainStore">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="StoreAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="StorePhoneNO" Type="int" />
+    <Property Name="StaffQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Consume">
+    <Key>
+      <PropertyRef Name="MerchID" />
+    </Key>
+    <Property Name="MerchID" Type="int" Nullable="false" />
+    <Property Name="MemID" Type="int" Nullable="false" />
+    <Property Name="ConDate" Type="datetime" />
+    <Property Name="ConAmount" Type="smallmoney" />
+  </EntityType>
+  <EntityType Name="Inventory">
+    <Key>
+      <PropertyRef Name="MerchID" />
+    </Key>
+    <Property Name="MerchID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="InvenQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemID" />
+    </Key>
+    <Property Name="MemID" Type="int" Nullable="false" />
+    <Property Name="MemName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MemGender" Type="char" MaxLength="1" />
+    <Property Name="MemAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="MemPhoneNO" Type="int" />
+    <Property Name="CardNO" Type="bigint" />
+    <Property Name="RegistrationDate" Type="datetime" />
+    <Property Name="TotalAmount" Type="smallmoney" />
+  </EntityType>
+  <EntityType Name="Merchandise">
+    <Key>
+      <PropertyRef Name="MerchID" />
+    </Key>
+    <Property Name="MerchID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="VendorID" Type="int" Nullable="false" />
+    <Property Name="MerchName" Type="nvarchar" MaxLength="100" />
+    <Property Name="MerchPrice" Type="smallmoney" />
+    <Property Name="BarCode" Type="bigint" />
+    <Property Name="PromotionPrice" Type="smallmoney" />
+    <Property Name="PromotionDateS" Type="datetime" />
+    <Property Name="PromotionDateE" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="StaffName" Type="nvarchar" MaxLength="100" />
+    <Property Name="StaffGender" Type="char" MaxLength="1" />
+    <Property Name="StaffAge" Type="int" />
+    <Property Name="StaffWage" Type="smallmoney" />
+    <Property Name="StaffAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="StaffPhoneNO" Type="int" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="MerchID" />
+    </Key>
+    <Property Name="MerchID" Type="int" Nullable="false" />
+    <Property Name="VendorID" Type="int" Nullable="false" />
+    <Property Name="StockDate" Type="datetime" />
+    <Property Name="StockQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="VendorID" />
+    </Key>
+    <Property Name="VendorID" Type="int" Nullable="false" />
+    <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
+    <Property Name="VendorAddr" Type="nvarchar" MaxLength="300" />
+    <Property Name="VendorPhoneNO" Type="int" />
+  </EntityType>
+  <EntityType Name="Work">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="int" Nullable="false" />
+    <Property Name="StoreID" Type="int" Nullable="false" />
+    <Property Name="HireDate" Type="datetime" />
+    <Property Name="AwardsRecords" Type="nvarchar" MaxLength="1000" />
+    <Property Name="PunishmentRecords" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <Association Name="FK__Consume__MemID__25869641">
+    <End Role="Member" Type="StoreDBModel.Store.Member" Multiplicity="1" />
+    <End Role="Consume" Type="StoreDBModel.Store.Consume" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Member">
+        <PropertyRef Name="MemID" />
+      </Principal>
+      <Dependent Role="Consume">
+        <PropertyRef Name="MemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Consume__MerchID__24927208">
+    <End Role="Merchandise" Type="StoreDBModel.Store.Merchandise" Multiplicity="1" />
+    <End Role="Consume" Type="StoreDBModel.Store.Consume" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="MerchID" />
+      </Principal>
+      <Dependent Role="Consume">
+        <PropertyRef Name="MerchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Merch__20C1E124">
+    <End Role="Merchandise" Type="StoreDBModel.Store.Merchandise" Multiplicity="1" />
+    <End Role="Inventory" Type="StoreDBModel.Store.Inventory" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="MerchID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="MerchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Inventory__Store__21B6055D">
+    <End Role="ChainStore" Type="StoreDBModel.Store.ChainStore" Multiplicity="1" />
+    <End Role="Inventory" Type="StoreDBModel.Store.Inventory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChainStore">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Inventory">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Merchandi__Store__173876EA">
+    <End Role="ChainStore" Type="StoreDBModel.Store.ChainStore" Multiplicity="1" />
+    <End Role="Merchandise" Type="StoreDBModel.Store.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChainStore">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Merchandi__Vendo__182C9B23">
+    <End Role="Vendor" Type="StoreDBModel.Store.Vendor" Multiplicity="1" />
+    <End Role="Merchandise" Type="StoreDBModel.Store.Merchandise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Merchandise">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__StoreID__1273C1CD">
+    <End Role="ChainStore" Type="StoreDBModel.Store.ChainStore" Multiplicity="1" />
+    <End Role="Staff" Type="StoreDBModel.Store.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChainStore">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stock__MerchID__286302EC">
+    <End Role="Merchandise" Type="StoreDBModel.Store.Merchandise" Multiplicity="1" />
+    <End Role="Stock" Type="StoreDBModel.Store.Stock" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Merchandise">
+        <PropertyRef Name="MerchID" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="MerchID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Stock__VendorID__29572725">
+    <End Role="Vendor" Type="StoreDBModel.Store.Vendor" Multiplicity="1" />
+    <End Role="Stock" Type="StoreDBModel.Store.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="VendorID" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="VendorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Work__StaffID__1CF15040">
+    <End Role="Staff" Type="StoreDBModel.Store.Staff" Multiplicity="1" />
+    <End Role="Work" Type="StoreDBModel.Store.Work" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Work__StoreID__1DE57479">
+    <End Role="ChainStore" Type="StoreDBModel.Store.ChainStore" Multiplicity="1" />
+    <End Role="Work" Type="StoreDBModel.Store.Work" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChainStore">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Work">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
