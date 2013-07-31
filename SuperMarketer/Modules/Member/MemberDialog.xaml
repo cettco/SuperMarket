@@ -1,8 +1,49 @@
 ﻿<Window x:Class="SuperMarketer.MemberDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MemberDialog" Height="300" Width="300">
+        Title="顾客会员个人信息" Height="500" Width="400" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="会员编号：" Grid.Column="0" Grid.Row="0" FontSize="16"></Label>
+        <Label Content="会员卡号：" Grid.Column="0" Grid.Row="1" FontSize="16"></Label>
+        <Label Content="会员姓名：" Grid.Column="0" Grid.Row="2" FontSize="16"></Label>
+        <Label Content="会员性别：" Grid.Column="0" Grid.Row="3" FontSize="16"></Label>
+        <Label Content="注册日期：" Grid.Column="0" Grid.Row="4" FontSize="16"></Label>
+        <Label Content="累计消费金额：" Grid.Column="0" Grid.Row="5" FontSize="16"></Label>
+        <Label Content="会员地址：" Grid.Column="0" Grid.Row="6" FontSize="16"></Label>
+        <Label Content="会员电话号码：" Grid.Column="0" Grid.Row="7" FontSize="16"></Label>
+        <TextBox Name="txbMemID" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,4,0,8" LostFocus="txbMemID_LostFocus"/>
+        <TextBox Name="txbCardNO" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,4,0,8" LostFocus="txbCardNO_LostFocus"/>
+        <TextBox Name="txbMemName" MaxLength="100" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="0,4,0,8" LostFocus="txbMemName_LostFocus"/>
+        <ComboBox Name="cmbMemGender" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Margin="0,4,0,8">
+            <ComboBoxItem Background="#FF3C4EFF" Content="男"/>
+            <ComboBoxItem Background="#FFFF79E1" Content="女"/>
+        </ComboBox>
+        <extToolkit:DateTimePicker Name="dtpRegistrationDate" Grid.Column="1" Grid.Row="4" Margin="0,4,0,8" LostFocus="dtpRegistrationDate_LostFocus"/>
+        <extToolkit:DateTimePicker Name="dtpRegistrationDateTo" IsEnabled="False" Grid.Column="2" Grid.Row="4" Margin="0,4,0,8" LostFocus="dtpRegistrationDateTo_LostFocus"/>
+        <TextBox Name="txbTotalAmount" Grid.Column="1" Grid.Row="5" Margin="0,4,0,8" LostFocus="txbTotalAmount_LostFocus"/>
+        <TextBox Name="txbTotalAmountTo" IsEnabled="False" Grid.Column="2" Grid.Row="5" Margin="0,4,0,8" LostFocus="txbTotalAmountTo_LostFocus"/>
+        <TextBox Name="txbMemAddr" MaxLength="300" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="6" Margin="0,4,0,8" LostFocus="txbMemAddr_LostFocus"/>
+        <TextBox Name="txbMemPhoneNO" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="7" Margin="0,4,0,8" LostFocus="txbMemPhoneNO_LostFocus"/>
+        <Button Name="btnCancel" Content="取消" Grid.Column="1" Grid.Row="9" Click="btnCancel_Click"/>
+        <Button Name="btnSubmit" Content="提交" Grid.Column="2" Grid.Row="9" Click="btnSubmit_Click"/>
+        <Separator Grid.Row="8" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

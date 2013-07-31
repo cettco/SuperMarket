@@ -30,15 +30,46 @@
                 <Button x:Name="btnConsumeAdd" Background="#FFAAFFA6" Content="添加新项" Click="btnConsumeAdd_Click"/>
                 <Button x:Name="btnConsumeModify" Background="#FFFFF48B" Content="修改信息" Click="btnConsumeModify_Click"/>
                 <Button x:Name="btnConsumeDelete" Background="#FFFFAEAE" Content="删除选中项" Click="btnConsumeDelete_Click"/>
+                <Separator/>
+                <ComboBox Name="cmbConsumeDetail" Width="130" SelectionChanged="cmbConsumeDetail_SelectionChanged" SelectedIndex="0">
+                    <ComboBoxItem Content="选中时显示附加信息"/>
+                    <ComboBoxItem Content="不显示附加信息"/>
+                    <ComboBoxItem Content="全部显示附加信息"/>
+                </ComboBox>
             </ToolBar>
         </ToolBarPanel>
         <DataGrid Name="dataGridConsume" Grid.RowSpan="15" Grid.Row="1" SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="商品编号" Binding="{Binding MerchID}"></DataGridTextColumn>
-                <DataGridTextColumn Header="会员编号" Binding="{Binding MemID}"></DataGridTextColumn>
-                <DataGridTextColumn Header="消费日期" Binding="{Binding ConDate}"></DataGridTextColumn>
-                <DataGridTextColumn Header="消费数量" Binding="{Binding ConAmount}"></DataGridTextColumn>
+                <DataGridTextColumn Header="顾客会员编号" Binding="{Binding MemID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="销售日期" Binding="{Binding ConDATE}"></DataGridTextColumn>
+                <DataGridTextColumn Header="销售金额" Binding="{Binding ConAmount}"></DataGridTextColumn>
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="商品名称："/>
+                                <TextBlock Text="{Binding Merchandise.MerchName}"/>
+                                <TextBlock Text="  单价："/>
+                                <TextBlock Text="{Binding Merchandise.MerchPrice}"/>
+                                <TextBlock Text="  条形码："/>
+                                <TextBlock Text="{Binding Merchandise.BarCode}"/>
+                            </StackPanel>
+                            <Separator/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="顾客会员名："/>
+                                <TextBlock Text="{Binding Member.MemName}"/>
+                                <TextBlock Text="  卡号："/>
+                                <TextBlock Text="{Binding Member.CardNO}"/>
+                                <TextBlock Text="  个人消费金额总计："/>
+                                <TextBlock Text="{Binding Member.TotalAmount}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </Window>

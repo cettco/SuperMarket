@@ -19,7 +19,8 @@ namespace SuperMarketer
     /// </summary>
     public partial class ConsumeWindow : Window
     {
-        StoreDBEntities db = ((App)Application.Current).MainDb;
+        StoreDBEntities mainDb = ((App)Application.Current).MainDb;
+        StoreDBEntities db = new StoreDBEntities();
 
         //store current query in order to refer when refreshing.
         Object currentConsumeQuery;
@@ -27,16 +28,16 @@ namespace SuperMarketer
         public ConsumeWindow()
         {
             InitializeComponent();
-            currentConsumeQuery = from Consume in db.Consumes
-                                select Consume;
+            currentConsumeQuery = from consume in db.Consumes
+                                  select consume;
             ShowAll();
         }
 
         private void ShowAll()
         {
             //Tab Consume
-            var result = from Consume in db.Consumes
-                         select Consume;
+            var result = from consume in db.Consumes
+                         select consume;
             currentConsumeQuery = result;
             dataGridConsume.ItemsSource = result.ToList();
         }
@@ -86,15 +87,23 @@ namespace SuperMarketer
                 return;
             }
 
-            db.Consumes.Add(newItem);
-            Application.Current.Properties["ConsumeDialogItem"] = null;
             try
             {
-                db.SaveChanges();
+                db.Consumes.AddObject(newItem);
             }
             catch (Exception exc)
             {
-                db.Consumes.Remove(newItem);
+                MessageBox.Show(exc.Message, "ERROR");
+                Application.Current.Properties["ConsumeDialogItem"] = null;
+                return;
+            }
+            Application.Current.Properties["ConsumeDialogItem"] = null;
+            try
+            {
+                db.SaveChanges(false);
+            }
+            catch (Exception exc)
+            {
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -105,7 +114,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -133,14 +146,14 @@ namespace SuperMarketer
                 if (modItem != null)
                 {
                     modItem.MemID = queryItem.MemID;
-                    modItem.ConDate = queryItem.ConDate;
+                    modItem.ConDATE = queryItem.ConDATE;
                     modItem.ConAmount = queryItem.ConAmount;
                 }
 
                 Application.Current.Properties["ConsumeDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -155,7 +168,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -169,10 +186,10 @@ namespace SuperMarketer
                 //confirm.
                 if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.Consumes.Remove(item);
+                db.Consumes.DeleteObject(item);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -186,7 +203,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }

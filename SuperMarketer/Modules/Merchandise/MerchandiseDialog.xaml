@@ -1,8 +1,49 @@
 ﻿<Window x:Class="SuperMarketer.MerchandiseDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MerchandiseDialog" Height="300" Width="300">
+        xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Title="商品信息" Height="500" Width="300" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="商品编号：" Grid.Column="0" Grid.Row="0" FontSize="16"></Label>
+        <Label Content="连锁店编号：" Grid.Column="0" Grid.Row="1" FontSize="16"></Label>
+        <Label Content="供应商编号：" Grid.Column="0" Grid.Row="2" FontSize="16"></Label>
+        <Label Content="商品名称：" Grid.Column="0" Grid.Row="3" FontSize="16"></Label>
+        <Label Content="商品单价：" Grid.Column="0" Grid.Row="4" FontSize="16"></Label>
+        <Label Content="条形码：" Grid.Column="0" Grid.Row="5" FontSize="16"></Label>
+        <Label Content="促销价：" Grid.Column="0" Grid.Row="6" FontSize="16"></Label>
+        <Label Content="促销开始日期：" Grid.Column="0" Grid.Row="7" FontSize="16"></Label>
+        <Label Content="促销结束日期：" Grid.Column="0" Grid.Row="8" FontSize="16"></Label>
+        <TextBox Name="txbMerchID" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" Margin="0,4,0,8" LostFocus="txbMerchID_LostFocus"/>
+        <TextBox Name="txbStoreID" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Margin="0,4,0,8" LostFocus="txbStoreID_LostFocus"/>
+        <TextBox Name="txbVendorID" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="2" Margin="0,4,0,8" LostFocus="txbVendorID_LostFocus"/>
+        <TextBox Name="txbMerchName" MaxLength="100" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" Margin="0,4,0,8" LostFocus="txbMerchName_LostFocus"/> 
+        <TextBox Name="txbMerchPrice" Grid.Column="1" Grid.Row="4" Margin="0,4,0,8" LostFocus="txbMerchPrice_LostFocus"/>
+        <TextBox Name="txbMerchPriceTo" IsEnabled="False" Grid.Column="2" Grid.Row="4" Margin="0,4,0,8" LostFocus="txbMerchPriceTo_LostFocus"/>
+        <TextBox Name="txbBarCode" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="5" Margin="0,4,0,8" LostFocus="txbBarCode_LostFocus"/>
+        <TextBox Name="txbPromotionPrice" Grid.Column="1" Grid.Row="6" Margin="0,4,0,8" LostFocus="txbPromotionPrice_LostFocus"/>
+        <TextBox Name="txbPromotionPriceTo" IsEnabled="False" Grid.Column="2" Grid.Row="6" Margin="0,4,0,8" LostFocus="txbPromotionPriceTo_LostFocus"/>
+        <extToolkit:DateTimePicker Name="dtpPromotionDateS" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="7" Margin="0,4,0,8" LostFocus="dtpPromotionDateS_LostFocus"/>
+        <extToolkit:DateTimePicker Name="dtpPromotionDateE" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="8" Margin="0,4,0,8" LostFocus="dtpPromotionDateE_LostFocus"/>
+        <Button Name="btnCancel" Content="取消" Grid.Column="1" Grid.Row="10" Click="btnCancel_Click"/>
+        <Button Name="btnSubmit" Content="提交" Grid.Column="2" Grid.Row="10" Click="btnSubmit_Click"/>
+        <Separator Grid.Row="9" Grid.ColumnSpan="3"/>
     </Grid>
 </Window>

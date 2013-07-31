@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="员工管理" Height="600" Width="800" MinWidth="800" MinHeight="600">
     <Grid>
-        <TabControl Name="tabControl">
+        <TabControl Name="tabControl" SelectionChanged="tabControl_SelectionChanged">
             <TabItem Header="员工个人信息" Name="tabStaff">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -33,7 +33,7 @@
                             <Button x:Name="btnStaffModify" Background="#FFFFF48B" Content="修改信息" Click="btnStaffModify_Click"/>
                             <Button x:Name="btnStaffDelete" Background="#FFFFAEAE" Content="删除选中项" Click="btnStaffDelete_Click"/>
                             <Separator/>
-                            <ComboBox Name="cmbStaffDetail" Width="120" SelectionChanged="cmbStaffDetail_SelectionChanged" SelectedIndex="0">
+                            <ComboBox Name="cmbStaffDetail" Width="130" SelectionChanged="cmbStaffDetail_SelectionChanged" SelectedIndex="0">
                                 <ComboBoxItem Content="选中时显示附加信息"/>
                                 <ComboBoxItem Content="不显示附加信息"/>
                                 <ComboBoxItem Content="全部显示附加信息"/>
@@ -97,7 +97,7 @@
                             <Button x:Name="btnWorkModify" Background="#FFFFF48B" Content="修改信息" Click="btnWorkModify_Click"/>
                             <Button x:Name="btnWorkDelete" Background="#FFFFAEAE" Content="删除选中项" Click="btnWorkDelete_Click"/>
                             <Separator/>
-                            <ComboBox Name="cmbWorkDetail" Width="120" SelectionChanged="cmbWorkDetail_SelectionChanged" SelectedIndex="0">
+                            <ComboBox Name="cmbWorkDetail" Width="130" SelectionChanged="cmbWorkDetail_SelectionChanged" SelectedIndex="0">
                                 <ComboBoxItem Content="选中时显示附加信息"/>
                                 <ComboBoxItem Content="不显示附加信息"/>
                                 <ComboBoxItem Content="全部显示附加信息"/>
@@ -108,7 +108,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="员工编号" Binding="{Binding StaffID}"></DataGridTextColumn>
                             <DataGridTextColumn Header="连锁店编号" Binding="{Binding StoreID}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="聘用日期" Binding="{Binding HireDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="聘用日期" Binding="{Binding HireDATE}"></DataGridTextColumn>
                         </DataGrid.Columns>
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>

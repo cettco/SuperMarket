@@ -19,7 +19,8 @@ namespace SuperMarketer
     /// </summary>
     public partial class VendorWindow : Window
     {
-        StoreDBEntities db = ((App)Application.Current).MainDb;
+        StoreDBEntities mainDb = ((App)Application.Current).MainDb;
+        StoreDBEntities db = new StoreDBEntities();
 
         //store current query in order to refer when refreshing.
         Object currentQuery;
@@ -32,8 +33,8 @@ namespace SuperMarketer
 
         private void ShowAll()
         {
-            var result = from Vendors in db.Vendors
-                         select Vendors;
+            var result = from vendor in db.Vendors
+                         select vendor;
             currentQuery = result;
             dataGrid.ItemsSource = result.ToList();
         }
@@ -54,13 +55,13 @@ namespace SuperMarketer
             dlg.ShowDialog();
             //query returned by dialog.
             IQueryable<Vendor> query = Application.Current.Properties["VendorDialogQuery"] as IQueryable<Vendor>;
-            
+
             if (query != null)
             {
                 currentQuery = query;
                 dataGrid.ItemsSource = query.ToList();
             }
-            
+
             Application.Current.Properties["VendorDialogQuery"] = null;
         }
 
@@ -76,16 +77,24 @@ namespace SuperMarketer
                 Application.Current.Properties["VendorDialogItem"] = null;
                 return;
             }
-            
-            db.Vendors.Add(newItem);
-            Application.Current.Properties["VendorDialogItem"] = null;
+
             try
             {
-                db.SaveChanges();
+                db.Vendors.AddObject(newItem);
             }
             catch (Exception exc)
             {
-                db.Vendors.Remove(newItem);
+                MessageBox.Show(exc.Message, "ERROR");
+                Application.Current.Properties["VendorDialogItem"] = null;
+                return;
+            }
+            Application.Current.Properties["VendorDialogItem"] = null;
+            try
+            {
+                db.SaveChanges(false);
+            }
+            catch (Exception exc)
+            {
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -96,7 +105,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -127,11 +140,11 @@ namespace SuperMarketer
                     modItem.VendorAddr = queryItem.VendorAddr;
                     modItem.VendorPhoneNO = queryItem.VendorPhoneNO;
                 }
-                
+
                 Application.Current.Properties["VendorDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -146,7 +159,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -158,12 +175,12 @@ namespace SuperMarketer
             if (item != null)
             {
                 //confirm.
-                if (MessageBox.Show("确认删除该条信息吗？","操作确认", MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.No)
+                if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.Vendors.Remove(item);
+                db.Vendors.DeleteObject(item);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -177,7 +194,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }

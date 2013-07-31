@@ -58,6 +58,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -69,32 +70,41 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChainStore.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Chainstore\ChainstoreDialog.xaml.cs">
       <DependentUpon>ChainstoreDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Chainstore\ChainstoreWindow.xaml.cs">
       <DependentUpon>ChainstoreWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Consume.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Consume\ConsumeDialog.xaml.cs">
       <DependentUpon>ConsumeDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Consume\ConsumeWindow.xaml.cs">
       <DependentUpon>ConsumeWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Modules\Inventory\InventoryDialog.xaml.cs">
       <DependentUpon>InventoryDialog.xaml</DependentUpon>
@@ -105,17 +115,11 @@
     <Compile Include="LogioWindow.xaml.cs">
       <DependentUpon>LogioWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Member.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Member\MemberDialog.xaml.cs">
       <DependentUpon>MemberDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Member\MemberWindow.xaml.cs">
       <DependentUpon>MemberWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Merchandise.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Modules\Merchandise\MerchandiseDialog.xaml.cs">
       <DependentUpon>MerchandiseDialog.xaml</DependentUpon>
@@ -123,17 +127,11 @@
     <Compile Include="Modules\Merchandise\MerchandiseWindow.xaml.cs">
       <DependentUpon>MerchandiseWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Staff.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Staff\StaffDialog.xaml.cs">
       <DependentUpon>StaffDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Staff\StaffWindow.xaml.cs">
       <DependentUpon>StaffWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Stock.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Modules\Stock\StockDialog.xaml.cs">
       <DependentUpon>StockDialog.xaml</DependentUpon>
@@ -141,35 +139,19 @@
     <Compile Include="Modules\Stock\StockWindow.xaml.cs">
       <DependentUpon>StockWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StoreDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="StoreDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>StoreDBModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Vendor.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Vendor\VendorDialog.xaml.cs">
       <DependentUpon>VendorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Modules\Vendor\VendorWindow.xaml.cs">
       <DependentUpon>VendorWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Work.cs">
-      <DependentUpon>StoreDBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Modules\Staff\WorkDialog.xaml.cs">
       <DependentUpon>WorkDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StoreDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StoreDBModel.edmx</DependentUpon>
     </Compile>
     <Page Include="Modules\Chainstore\ChainstoreDialog.xaml">
       <SubType>Designer</SubType>
@@ -284,18 +266,8 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>StoreDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="StoreDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StoreDBModel.edmx</DependentUpon>
-      <LastGenOutput>StoreDBModel.Context.cs</LastGenOutput>
-    </None>
     <None Include="StoreDBModel.edmx.diagram">
       <DependentUpon>StoreDBModel.edmx</DependentUpon>
-    </None>
-    <None Include="StoreDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>StoreDBModel.edmx</DependentUpon>
-      <LastGenOutput>StoreDBModel.cs</LastGenOutput>
     </None>
   </ItemGroup>
   <ItemGroup>

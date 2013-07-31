@@ -66,21 +66,7 @@ namespace SuperMarketer
 
         private void txbVendorAddr_LostFocus(object sender, RoutedEventArgs e)
         {
-            //simple validation.
-            //if (isFindMode)
-            //    return;
-            //TextBox txb = sender as TextBox;
-            //try
-            //{
-            //    int.Parse(txb.Text);
-            //    txb.Background = new SolidColorBrush(Colors.White);
-            //    txb.ToolTip = null;
-            //}
-            //catch (Exception exc)
-            //{
-            //    txb.Background = new SolidColorBrush(Colors.Red);
-            //    txb.ToolTip = exc.Message;
-            //}
+
         }
 
         private void txbVendorPhoneNO_LostFocus(object sender, RoutedEventArgs e)
@@ -91,7 +77,7 @@ namespace SuperMarketer
             TextBox txb = sender as TextBox;
             try
             {
-                int.Parse(txb.Text);
+                Int64.Parse(txb.Text);
                 txb.Background = new SolidColorBrush(Colors.White);
                 txb.ToolTip = null;
             }
@@ -116,19 +102,20 @@ namespace SuperMarketer
             //create a query in order to execute in findmode.
             if (isFindMode)
             {
-                int parseID, parseVendorPhoneNo;
+                int parseID;
+                Int64 parseVendorPhoneNo;
                 //int parseVendorPhoneNo;
                 bool bID, bVendorPhoneNo;
                 //record whether parsing succeeds or not.
-                bID = int.TryParse(txbVendorID.Text,out parseID);
-                bVendorPhoneNo = int.TryParse(txbVendorPhoneNO.Text, out parseVendorPhoneNo);
-                
+                bID = int.TryParse(txbVendorID.Text, out parseID);
+                bVendorPhoneNo = Int64.TryParse(txbVendorPhoneNO.Text, out parseVendorPhoneNo);
+
                 //create query. note the use of (p?a:b) expressions. 
                 //if parsing failed, ignore that predicate(in other words, (&& true)).
                 var query = from Vendors in db.Vendors
                             where (bID ? Vendors.VendorID == parseID : true)
                             && (bVendorPhoneNo ? Vendors.VendorPhoneNO == parseVendorPhoneNo : true)
-                            //&& (bPhone ? Vendors.StorePhoneNO == parsePhone : true)
+                                //&& (bPhone ? Vendors.StorePhoneNO == parsePhone : true)
                             && (Vendors.VendorAddr.Contains(txbVendorAddr.Text))
                             && (Vendors.VendorName.Contains(txbVendorName.Text))
                             select Vendors;
@@ -144,15 +131,10 @@ namespace SuperMarketer
                 {
                     //parse and create prototype item.
                     int parseID = int.Parse(txbVendorID.Text);
-                    int parseVendorPhoneNo = int.Parse(txbVendorPhoneNO.Text);
-                    //int parsePhone = int.Parse(txbStorePhoneNO.Text);
+                    Int64 parseVendorPhoneNo = Int64.Parse(txbVendorPhoneNO.Text);
+                    
                     Vendor item = new Vendor()
                     {
-                        //StoreID = parseID,
-                        ////StorePhoneNO = parsePhone,
-                        //StorePhoneNO = txbStorePhoneNO.Text,
-                        //StoreAddr = txbStoreAddr.Text,
-                        //StaffQuantity = parseStaffQuantity
                         VendorID = parseID,
                         VendorName = txbVendorName.Text,
                         VendorAddr = txbVendorAddr.Text,

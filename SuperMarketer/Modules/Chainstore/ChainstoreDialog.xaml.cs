@@ -74,7 +74,7 @@ namespace SuperMarketer
             TextBox txb = sender as TextBox;
             try
             {
-                int.Parse(txb.Text);
+                Int64.Parse(txb.Text);
                 txb.Background = new SolidColorBrush(Colors.White);
                 txb.ToolTip = null;
             }
@@ -118,12 +118,13 @@ namespace SuperMarketer
             //create a query in order to execute in findmode.
             if (isFindMode)
             {
-                int parseID, parseStaffQuantity, parsePhone;
+                int parseID, parseStaffQuantity;
+                Int64 parsePhone;
                 bool bID, bStaffQuantity, bPhone;
                 //record whether parsing succeeds or not.
                 bID = int.TryParse(txbStoreID.Text,out parseID);
                 bStaffQuantity = int.TryParse(txbStaffQuantity.Text, out parseStaffQuantity);
-                bPhone = int.TryParse(txbStorePhoneNO.Text, out parsePhone);
+                bPhone = Int64.TryParse(txbStorePhoneNO.Text, out parsePhone);
                 
                 //create query. note the use of (p?a:b) expressions. 
                 //if parsing failed, ignore that predicate(in other words, (&& true)).
@@ -146,7 +147,7 @@ namespace SuperMarketer
                     //parse and create prototype item.
                     int parseID = int.Parse(txbStoreID.Text);
                     int parseStaffQuantity = int.Parse(txbStaffQuantity.Text);
-                    int parsePhone = int.Parse(txbStorePhoneNO.Text);
+                    Int64 parsePhone = Int64.Parse(txbStorePhoneNO.Text);
                     ChainStore item = new ChainStore()
                     {
                         StoreID = parseID,

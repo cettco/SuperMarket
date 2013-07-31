@@ -35,7 +35,7 @@ namespace SuperMarketer
                 txbMerchID.IsEnabled = false;
                 txbMerchID.Text = item.MerchID.ToString();
                 txbVenderID.Text = item.VendorID.ToString();
-                txbStockDate.Text = item.StockDate.ToString();
+                txbStockDate.Value = item.StockDATE;
                 txbStockQuantity.Text = item.StockQuantity.ToString();
             }
         }
@@ -122,7 +122,7 @@ namespace SuperMarketer
                 //record whether parsing succeeds or not.
                 bMerchID = int.TryParse(txbMerchID.Text, out parseMerchID);
                 bVenderID = int.TryParse(txbVenderID.Text, out parseVenderID);
-                parseStockDate = txbStockDate.SelectedDate;
+                parseStockDate = txbStockDate.Value;
                 //bStockDate = int.TryParse(txbStockDate.Text, out parseStockDate);
                 bStockQuantity = int.TryParse(txbStockQuantity.Text, out parseStockQuantity);
 
@@ -131,7 +131,7 @@ namespace SuperMarketer
                 var query = from Stock in db.Stocks
                             where (bMerchID ? Stock.MerchID == parseMerchID : true)
                             && (bVenderID ? Stock.VendorID == parseVenderID : true)
-                            && (parseStockDate != null ? Stock.StockDate==parseStockDate: true)
+                            && (parseStockDate != null ? Stock.StockDATE == parseStockDate : true)
                             && (bStockQuantity ? Stock.StockQuantity == parseStockQuantity : true)
                             select Stock;
 
@@ -149,14 +149,14 @@ namespace SuperMarketer
                     int parseMerchID = int.Parse(txbMerchID.Text);
                     int parseVenderID = int.Parse(txbVenderID.Text);
                     int parseStockQuantity = int.Parse(txbStockQuantity.Text);
-                    DateTime? parseStockDate = txbStockDate.SelectedDate;
+                    DateTime? parseStockDate = txbStockDate.Value;
 
                     Stock item = new Stock()
                     {
                         MerchID = parseMerchID,
                         VendorID = parseVenderID,
                         StockQuantity = parseStockQuantity,
-                        StockDate = parseStockDate,
+                        StockDATE = parseStockDate,
                     };
 
                     //save into app properties.

@@ -19,7 +19,8 @@ namespace SuperMarketer
     /// </summary>
     public partial class ChainstoreWindow : Window
     {
-        StoreDBEntities db = ((App)Application.Current).MainDb;
+        StoreDBEntities db = new StoreDBEntities();
+        StoreDBEntities mainDb = ((App)Application.Current).MainDb;
 
         //store current query in order to refer when refreshing.
         Object currentQuery;
@@ -54,13 +55,13 @@ namespace SuperMarketer
             dlg.ShowDialog();
             //query returned by dialog.
             IQueryable<ChainStore> query = Application.Current.Properties["ChainstoreDialogQuery"] as IQueryable<ChainStore>;
-            
+
             if (query != null)
             {
                 currentQuery = query;
                 dataGrid.ItemsSource = query.ToList();
             }
-            
+
             Application.Current.Properties["ChainstoreDialogQuery"] = null;
         }
 
@@ -76,16 +77,17 @@ namespace SuperMarketer
                 Application.Current.Properties["ChainstoreDialogItem"] = null;
                 return;
             }
+
+
+            db.ChainStores.AddObject(newItem);
             
-            db.ChainStores.Add(newItem);
             Application.Current.Properties["ChainstoreDialogItem"] = null;
             try
             {
-                db.SaveChanges();
+                db.SaveChanges(false);
             }
             catch (Exception exc)
             {
-                db.ChainStores.Remove(newItem);
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -96,7 +98,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -121,17 +127,18 @@ namespace SuperMarketer
                 }
 
                 ChainStore modItem = db.ChainStores.First(value => value.StoreID == item.StoreID);
+
                 if (modItem != null)
                 {
                     modItem.StoreAddr = queryItem.StoreAddr;
                     modItem.StorePhoneNO = queryItem.StorePhoneNO;
                     modItem.StaffQuantity = queryItem.StaffQuantity;
                 }
-                
+
                 Application.Current.Properties["ChainstoreDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -146,7 +153,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -158,12 +169,15 @@ namespace SuperMarketer
             if (item != null)
             {
                 //confirm.
-                if (MessageBox.Show("确认删除该条信息吗？","操作确认", MessageBoxButton.YesNo,MessageBoxImage.Warning) == MessageBoxResult.No)
+                if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.ChainStores.Remove(item);
+                //
+
+                db.ChainStores.DeleteObject(item);
+
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -177,7 +191,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }

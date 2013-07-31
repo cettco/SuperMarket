@@ -31,8 +31,8 @@
         <TextBox Name="txbStoreID" Grid.Column="1" Grid.Row="1" Margin="0,4,0,8" Width="140" LostFocus="txbStoreID_LostFocus"/>
         <TextBox Name="txbStaffName" MaxLength="100" Grid.Column="1" Grid.Row="2" Margin="0,4,0,8" Width="140" LostFocus="txbStaffName_LostFocus"/>
         <ComboBox Name="cmbStaffGender" Grid.Column="1" Grid.Row="3" Margin="0,4,0,8" Width="140">
-            <ComboBoxItem Background="#FF3C4EFF" Content="M"/>
-            <ComboBoxItem Background="#FFFF79E1" Content="F"/>
+            <ComboBoxItem Background="#FF3C4EFF" Content="男"/>
+            <ComboBoxItem Background="#FFFF79E1" Content="女"/>
         </ComboBox>
         <TextBox Name="txbStaffAge" Grid.Column="1" Grid.Row="4" Margin="0,4,0,8" Width="140" LostFocus="txbStaffAge_LostFocus"/>
         <TextBox Name="txbStaffWage" Grid.Column="1" Grid.Row="5" Margin="0,4,0,8" Width="140" LostFocus="txbStaffWage_LostFocus"/>

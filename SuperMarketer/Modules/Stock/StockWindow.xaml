@@ -36,7 +36,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="商品编号" Binding="{Binding MerchID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="供应商编号" Binding="{Binding VendorID}"></DataGridTextColumn>
-                <DataGridTextColumn Header="进货日期" Binding="{Binding StockDate}"></DataGridTextColumn>
+                <DataGridTextColumn Header="进货日期" Binding="{Binding StockDATE}"></DataGridTextColumn>
                 <DataGridTextColumn Header="进货数量" Binding="{Binding StockQuantity}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>

@@ -42,10 +42,10 @@ namespace SuperMarketer
                 txbStaffPhoneNO.Text = item.StaffPhoneNO.ToString();
                 switch(item.StaffGender.ToString())
                 {
-                    case "M":
+                    case "男":
                         cmbStaffGender.SelectedIndex = 0;
                         break;
-                    case "F":
+                    case "女":
                         cmbStaffGender.SelectedIndex = 1;
                         break;
                 }
@@ -122,6 +122,7 @@ namespace SuperMarketer
             TextBox txb = sender as TextBox;
             try
             {
+                //staff wage is a decimal.
                 decimal.Parse(txb.Text);
                 txb.Background = new SolidColorBrush(Colors.White);
                 txb.ToolTip = null;
@@ -146,7 +147,7 @@ namespace SuperMarketer
             TextBox txb = sender as TextBox;
             try
             {
-                int.Parse(txb.Text);
+                Int64.Parse(txb.Text);
                 txb.Background = new SolidColorBrush(Colors.White);
                 txb.ToolTip = null;
             }
@@ -171,14 +172,15 @@ namespace SuperMarketer
             //create a query in order to execute in findmode.
             if (isFindMode)
             {
-                int parseStaffID, parseStoreID, parseStaffAge, parseStaffPhoneNO;
+                int parseStaffID, parseStoreID, parseStaffAge;
+                Int64 parseStaffPhoneNO;
                 decimal parseStaffWage;
                 bool bStaffID, bStoreID, bStaffAge, bStaffPhoneNO, bStaffWage;
                 //record whether parsing succeeds or not.
                 bStaffID = int.TryParse(txbStaffID.Text, out parseStaffID);
                 bStoreID = int.TryParse(txbStoreID.Text, out parseStoreID);
                 bStaffAge = int.TryParse(txbStaffAge.Text, out parseStaffAge);
-                bStaffPhoneNO = int.TryParse(txbStaffPhoneNO.Text, out parseStaffPhoneNO);
+                bStaffPhoneNO = Int64.TryParse(txbStaffPhoneNO.Text, out parseStaffPhoneNO);
                 bStaffWage = decimal.TryParse(txbStaffWage.Text, out parseStaffWage);
 
                 //create query. note the use of (p?a:b) expressions. 
@@ -189,7 +191,7 @@ namespace SuperMarketer
                             && (bStaffAge ? staff.StaffAge == parseStaffAge : true)
                             && (bStaffPhoneNO ? staff.StaffPhoneNO == parseStaffPhoneNO : true)
                             && (bStaffWage ? staff.StaffWage == parseStaffWage : true)
-                            && (cmbStaffGender.SelectedIndex != -1 ? staff.StaffGender == (cmbStaffGender.SelectedIndex == 0 ? "M" : "F") : true)
+                            && (cmbStaffGender.SelectedIndex != -1 ? staff.StaffGender == (cmbStaffGender.SelectedIndex == 0 ? "男" : "女") : true)
                             && (staff.StaffName.Contains(txbStaffName.Text))
                             && (staff.StaffAddr.Contains(txbStaffAddr.Text))
                             select staff;
@@ -213,7 +215,7 @@ namespace SuperMarketer
                     int parseStaffID = int.Parse(txbStaffID.Text);
                     int parseStoreID = int.Parse(txbStoreID.Text);
                     int parseStaffAge = int.Parse(txbStaffAge.Text);
-                    int parseStaffPhoneNO = int.Parse(txbStaffPhoneNO.Text);
+                    Int64 parseStaffPhoneNO = Int64.Parse(txbStaffPhoneNO.Text);
                     decimal parseStaffWage = decimal.Parse(txbStaffWage.Text);
 
                     Staff item = new Staff()
@@ -225,7 +227,7 @@ namespace SuperMarketer
                         StaffWage = parseStaffWage,
                         StaffName = txbStaffName.Text,
                         StaffAddr = txbStaffAddr.Text,
-                        StaffGender = (cmbStaffGender.SelectedIndex == 0 ? "M" : "F")
+                        StaffGender = (cmbStaffGender.SelectedIndex == 0 ? "男" : "女")
                     };
 
                     //save into app properties.

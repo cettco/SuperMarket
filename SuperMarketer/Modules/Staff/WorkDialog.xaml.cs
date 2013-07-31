@@ -37,7 +37,7 @@ namespace SuperMarketer
                 txbStoreID.Text = item.StoreID.ToString();
                 txbAwards.Text = item.AwardsRecords.ToString();
                 txbPunishment.Text = item.PunishmentRecords.ToString();
-                dtpHireDate.SelectedDate = item.HireDate;
+                dtpHireDate.Value = item.HireDATE;
             }
 
             if (isFindMode)
@@ -123,16 +123,16 @@ namespace SuperMarketer
                 //record whether parsing succeeds or not.
                 bStaffID = int.TryParse(txbStaffID.Text, out parseStaffID);
                 bStoreID = int.TryParse(txbStoreID.Text, out parseStoreID);
-                DateTime? dtFrom = dtpHireDate.SelectedDate;
-                DateTime? dtTo = dtpHireDateTo.SelectedDate;
+                DateTime? dtFrom = dtpHireDate.Value;
+                DateTime? dtTo = dtpHireDateTo.Value;
 
                 //create query. note the use of (p?a:b) expressions. 
                 //if parsing failed, ignore that predicate(in other words, (&& true)).
                 var query = from work in db.Works
                             where (bStaffID ? work.StaffID == parseStaffID : true)
                             && (bStoreID ? work.StoreID == parseStoreID : true)
-                            && (dtFrom != null ? work.HireDate >= dtFrom : true)
-                            && (dtTo != null ? work.HireDate < dtTo : true)
+                            && (dtFrom != null ? work.HireDATE >= dtFrom : true)
+                            && (dtTo != null ? work.HireDATE < dtTo : true)
                             && (work.AwardsRecords.Contains(txbAwards.Text))
                             && (work.PunishmentRecords.Contains(txbPunishment.Text))
                             select work;
@@ -149,17 +149,17 @@ namespace SuperMarketer
                     //parse and create prototype item.
                     int parseStaffID = int.Parse(txbStaffID.Text);
                     int parseStoreID = int.Parse(txbStoreID.Text);
-                    if (dtpHireDate.SelectedDate == null)
+                    if (dtpHireDate.Value == null)
                     {
                         MessageBox.Show("日期不可为空。", "ERROR", MessageBoxButton.OK, MessageBoxImage.Error);
                         return;
                     }
-
+                    
                     Work item = new Work()
                     {
                         StaffID = parseStaffID,
                         StoreID = parseStoreID,
-                        HireDate = dtpHireDate.SelectedDate,
+                        HireDATE = dtpHireDate.Value,
                         AwardsRecords = txbAwards.Text,
                         PunishmentRecords = txbPunishment.Text
                     };

@@ -19,7 +19,8 @@ namespace SuperMarketer
     /// </summary>
     public partial class StaffWindow : Window
     {
-        StoreDBEntities db = ((App)Application.Current).MainDb;
+        StoreDBEntities mainDb = ((App)Application.Current).MainDb;
+        StoreDBEntities db = new StoreDBEntities();
 
         //store current query in order to refer when refreshing.
         Object currentStaffQuery;
@@ -61,12 +62,14 @@ namespace SuperMarketer
             if (tabControl.SelectedIndex == 0)
             {
                 //Tab Staff
-                dataGridStaff.ItemsSource = (currentStaffQuery as IQueryable<Staff>).ToList();
+                if (currentStaffQuery != null)
+                    dataGridStaff.ItemsSource = (currentStaffQuery as IQueryable<Staff>).ToList();
             }
             else if (tabControl.SelectedIndex == 1)
             {
                 //Tab Work
-                dataGridWork.ItemsSource = (currentWorkQuery as IQueryable<Work>).ToList();
+                if (currentWorkQuery != null)
+                    dataGridWork.ItemsSource = (currentWorkQuery as IQueryable<Work>).ToList();
             }
         }
 
@@ -109,15 +112,23 @@ namespace SuperMarketer
                 return;
             }
 
-            db.Staffs.Add(newItem);
-            Application.Current.Properties["StaffDialogItem"] = null;
             try
             {
-                db.SaveChanges();
+                db.Staffs.AddObject(newItem);
             }
             catch (Exception exc)
             {
-                db.Staffs.Remove(newItem);
+                MessageBox.Show(exc.Message, "ERROR");
+                Application.Current.Properties["StaffDialogItem"] = null;
+                return;
+            }
+            Application.Current.Properties["StaffDialogItem"] = null;
+            try
+            {
+                db.SaveChanges(false);
+            }
+            catch (Exception exc)
+            {
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -128,7 +139,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -167,7 +182,7 @@ namespace SuperMarketer
                 Application.Current.Properties["StaffDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -182,7 +197,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -196,10 +215,10 @@ namespace SuperMarketer
                 //confirm.
                 if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.Staffs.Remove(item);
+                db.Staffs.DeleteObject(item);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -213,7 +232,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }
@@ -256,16 +279,24 @@ namespace SuperMarketer
                 Application.Current.Properties["WorkDialogItem"] = null;
                 return;
             }
-
-            db.Works.Add(newItem);
-            Application.Current.Properties["WorkDialogItem"] = null;
             try
             {
-                db.SaveChanges();
+                db.Works.AddObject(newItem);
             }
             catch (Exception exc)
             {
-                db.Works.Remove(newItem);
+                MessageBox.Show(exc.Message, "ERROR");
+                Application.Current.Properties["WorkDialogItem"] = null;
+                return;
+            }
+            Application.Current.Properties["WorkDialogItem"] = null;
+
+            try
+            {
+                db.SaveChanges(false);
+            }
+            catch (Exception exc)
+            {
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -276,7 +307,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -304,7 +339,7 @@ namespace SuperMarketer
                 if (modItem != null)
                 {
                     modItem.StoreID = queryItem.StoreID;
-                    modItem.HireDate = queryItem.HireDate;
+                    modItem.HireDATE = queryItem.HireDATE;
                     modItem.AwardsRecords = queryItem.AwardsRecords;
                     modItem.PunishmentRecords = queryItem.PunishmentRecords;
                 }
@@ -312,7 +347,7 @@ namespace SuperMarketer
                 Application.Current.Properties["WorkDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -327,7 +362,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -341,10 +380,10 @@ namespace SuperMarketer
                 //confirm.
                 if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.Works.Remove(item);
+                db.Works.DeleteObject(item);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -358,7 +397,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }
@@ -399,6 +442,11 @@ namespace SuperMarketer
                     dataGridStaff.RowDetailsVisibilityMode = DataGridRowDetailsVisibilityMode.Visible;
                     break;
             }
+        }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh();
         }
     }
 }

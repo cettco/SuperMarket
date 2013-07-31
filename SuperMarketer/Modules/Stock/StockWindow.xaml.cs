@@ -19,7 +19,8 @@ namespace SuperMarketer
     /// </summary>
     public partial class StockWindow : Window
     {
-        StoreDBEntities db = ((App)Application.Current).MainDb;
+        StoreDBEntities mainDb = ((App)Application.Current).MainDb;
+        StoreDBEntities db = new StoreDBEntities();
 
         //store current query in order to refer when refreshing.
         Object currentStockQuery;
@@ -27,16 +28,16 @@ namespace SuperMarketer
         public StockWindow()
         {
             InitializeComponent();
-            currentStockQuery = from Stock in db.Stocks
-                                select Stock;
+            currentStockQuery = from stock in db.Stocks
+                                select stock;
             ShowAll();
         }
 
         private void ShowAll()
         {
             //Tab Stock
-            var result = from Stock in db.Stocks
-                         select Stock;
+            var result = from stock in db.Stocks
+                         select stock;
             currentStockQuery = result;
             dataGridStock.ItemsSource = result.ToList();
         }
@@ -86,15 +87,23 @@ namespace SuperMarketer
                 return;
             }
 
-            db.Stocks.Add(newItem);
-            Application.Current.Properties["StockDialogItem"] = null;
             try
             {
-                db.SaveChanges();
+                db.Stocks.AddObject(newItem);
             }
             catch (Exception exc)
             {
-                db.Stocks.Remove(newItem);
+                MessageBox.Show(exc.Message, "ERROR");
+                Application.Current.Properties["StockDialogItem"] = null;
+                return;
+            }
+            Application.Current.Properties["StockDialogItem"] = null;
+            try
+            {
+                db.SaveChanges(false);
+            }
+            catch (Exception exc)
+            {
                 Exception innerExc = exc;
                 while (!(innerExc is System.Data.SqlClient.SqlException))
                 {
@@ -105,7 +114,11 @@ namespace SuperMarketer
                     innerExc = innerExc.InnerException;
                 }
                 MessageBox.Show(innerExc.Message, "ERROR");
+                db = new StoreDBEntities();
+                ShowAll();
+                return;
             }
+            db.AcceptAllChanges();
             Refresh();
         }
 
@@ -133,14 +146,14 @@ namespace SuperMarketer
                 if (modItem != null)
                 {
                     modItem.VendorID = queryItem.VendorID;
-                    modItem.StockDate = queryItem.StockDate;
-                    modItem.StockQuantity= queryItem.StockQuantity;
+                    modItem.StockDATE = queryItem.StockDATE;
+                    modItem.StockQuantity = queryItem.StockQuantity;
                 }
 
                 Application.Current.Properties["StockDialogItem"] = null;
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -155,7 +168,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
 
             Refresh();
@@ -169,10 +186,10 @@ namespace SuperMarketer
                 //confirm.
                 if (MessageBox.Show("确认删除该条信息吗？", "操作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
                     return;
-                db.Stocks.Remove(item);
+                db.Stocks.DeleteObject(item);
                 try
                 {
-                    db.SaveChanges();
+                    db.SaveChanges(false);
                 }
                 catch (Exception exc)
                 {
@@ -186,7 +203,11 @@ namespace SuperMarketer
                         innerExc = innerExc.InnerException;
                     }
                     MessageBox.Show(innerExc.Message, "ERROR");
+                    db = new StoreDBEntities();
+                    ShowAll();
+                    return;
                 }
+                db.AcceptAllChanges();
             }
             Refresh();
         }

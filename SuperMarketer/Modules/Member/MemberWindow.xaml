@@ -1,8 +1,49 @@
 ﻿<Window x:Class="SuperMarketer.MemberWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MemberWindow" Height="300" Width="300">
+        Title="顾客会员管理" Height="600" Width="800" MinWidth="800" MinHeight="600">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ToolBarPanel Grid.Row="0">
+            <ToolBar Header="顾客会员个人信息管理">
+                <Button x:Name="btnShowAll" Background="#FF6BCFFD" Content="显示全部" Click="btnShowAll_Click"/>
+                <Button x:Name="btnRefresh" Background="#FFAEFFFF" Content="刷新" Click="btnRefresh_Click"/>
+                <Button x:Name="btnQuery" Background="#FFCAD4FF" Content="查询" Click="btnQuery_Click"/>
+                <Separator/>
+                <Button x:Name="btnAdd" Background="#FFAAFFA6" Content="添加新项" Click="btnAdd_Click"/>
+                <Button x:Name="btnModify" Background="#FFFFF48B" Content="修改信息" Click="btnModify_Click"/>
+                <Button x:Name="btnDelete" Background="#FFFFAEAE" Content="删除选中项" Click="btnDelete_Click"/>
+                <Separator/>
+            </ToolBar>
+        </ToolBarPanel>
+        <DataGrid Name="dataGrid" Grid.RowSpan="14" Grid.Row="1" SelectionMode="Single" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="会员编号" Binding="{Binding MemID}"></DataGridTextColumn>
+                <DataGridTextColumn Header="卡号" Binding="{Binding CardNO}"></DataGridTextColumn>
+                <DataGridTextColumn Header="会员姓名" Binding="{Binding MemName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="会员性别" Binding="{Binding MemGender}"></DataGridTextColumn>
+                <DataGridTextColumn Header="会员地址" Binding="{Binding MemAddr}"></DataGridTextColumn>
+                <DataGridTextColumn Header="会员电话号码" Binding="{Binding MemPhoneNO}"></DataGridTextColumn>
+                <DataGridTextColumn Header="注册日期" Binding="{Binding RegistrationDATE}"></DataGridTextColumn>
+                <DataGridTextColumn Header="累计消费金额" Binding="{Binding TotalAmount}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

@@ -66,7 +66,7 @@
           </Key>
           <Property Name="StoreID" Type="int" Nullable="false" />
           <Property Name="StoreAddr" Type="nvarchar" MaxLength="300" />
-          <Property Name="StorePhoneNO" Type="int" />
+          <Property Name="StorePhoneNO" Type="bigint" />
           <Property Name="StaffQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Consume">
@@ -75,7 +75,7 @@
           </Key>
           <Property Name="MerchID" Type="int" Nullable="false" />
           <Property Name="MemID" Type="int" Nullable="false" />
-          <Property Name="ConDate" Type="datetime" />
+          <Property Name="ConDATE" Type="datetime" />
           <Property Name="ConAmount" Type="smallmoney" />
         </EntityType>
         <EntityType Name="Inventory">
@@ -92,11 +92,11 @@
           </Key>
           <Property Name="MemID" Type="int" Nullable="false" />
           <Property Name="MemName" Type="nvarchar" MaxLength="100" />
-          <Property Name="MemGender" Type="char" MaxLength="1" />
+          <Property Name="MemGender" Type="nvarchar" MaxLength="2" />
           <Property Name="MemAddr" Type="nvarchar" MaxLength="300" />
-          <Property Name="MemPhoneNO" Type="int" />
+          <Property Name="MemPhoneNO" Type="bigint" />
           <Property Name="CardNO" Type="bigint" />
-          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="RegistrationDATE" Type="datetime" />
           <Property Name="TotalAmount" Type="smallmoney" />
         </EntityType>
         <EntityType Name="Merchandise">
@@ -110,8 +110,8 @@
           <Property Name="MerchPrice" Type="smallmoney" />
           <Property Name="BarCode" Type="bigint" />
           <Property Name="PromotionPrice" Type="smallmoney" />
-          <Property Name="PromotionDateS" Type="datetime" />
-          <Property Name="PromotionDateE" Type="datetime" />
+          <Property Name="PromotionDATES" Type="datetime" />
+          <Property Name="PromotionDATEE" Type="datetime" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -120,11 +120,11 @@
           <Property Name="StaffID" Type="int" Nullable="false" />
           <Property Name="StoreID" Type="int" Nullable="false" />
           <Property Name="StaffName" Type="nvarchar" MaxLength="100" />
-          <Property Name="StaffGender" Type="char" MaxLength="1" />
+          <Property Name="StaffGender" Type="nvarchar" MaxLength="2" />
           <Property Name="StaffAge" Type="int" />
           <Property Name="StaffWage" Type="smallmoney" />
           <Property Name="StaffAddr" Type="nvarchar" MaxLength="300" />
-          <Property Name="StaffPhoneNO" Type="int" />
+          <Property Name="StaffPhoneNO" Type="bigint" />
         </EntityType>
         <EntityType Name="Stock">
           <Key>
@@ -132,7 +132,7 @@
           </Key>
           <Property Name="MerchID" Type="int" Nullable="false" />
           <Property Name="VendorID" Type="int" Nullable="false" />
-          <Property Name="StockDate" Type="datetime" />
+          <Property Name="StockDATE" Type="datetime" />
           <Property Name="StockQuantity" Type="int" />
         </EntityType>
         <EntityType Name="Vendor">
@@ -142,7 +142,7 @@
           <Property Name="VendorID" Type="int" Nullable="false" />
           <Property Name="VendorName" Type="nvarchar" MaxLength="100" />
           <Property Name="VendorAddr" Type="nvarchar" MaxLength="300" />
-          <Property Name="VendorPhoneNO" Type="int" />
+          <Property Name="VendorPhoneNO" Type="bigint" />
         </EntityType>
         <EntityType Name="Work">
           <Key>
@@ -150,7 +150,7 @@
           </Key>
           <Property Name="StaffID" Type="int" Nullable="false" />
           <Property Name="StoreID" Type="int" Nullable="false" />
-          <Property Name="HireDate" Type="datetime" />
+          <Property Name="HireDATE" Type="datetime" />
           <Property Name="AwardsRecords" Type="nvarchar" MaxLength="1000" />
           <Property Name="PunishmentRecords" Type="nvarchar" MaxLength="1000" />
         </EntityType>
@@ -352,7 +352,7 @@
           </Key>
           <Property Name="StoreID" Type="Int32" Nullable="false" />
           <Property Name="StoreAddr" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="StorePhoneNO" Type="Int32" />
+          <Property Name="StorePhoneNO" Type="Int64" />
           <Property Name="StaffQuantity" Type="Int32" />
           <NavigationProperty Name="Inventories" Relationship="StoreDBModel.FK__Inventory__Store__21B6055D" FromRole="ChainStore" ToRole="Inventory" />
           <NavigationProperty Name="Merchandises" Relationship="StoreDBModel.FK__Merchandi__Store__173876EA" FromRole="ChainStore" ToRole="Merchandise" />
@@ -365,7 +365,7 @@
           </Key>
           <Property Name="MerchID" Type="Int32" Nullable="false" />
           <Property Name="MemID" Type="Int32" Nullable="false" />
-          <Property Name="ConDate" Type="DateTime" Precision="3" />
+          <Property Name="ConDATE" Type="DateTime" Precision="3" />
           <Property Name="ConAmount" Type="Decimal" Precision="10" Scale="4" />
           <NavigationProperty Name="Member" Relationship="StoreDBModel.FK__Consume__MemID__25869641" FromRole="Consume" ToRole="Member" />
           <NavigationProperty Name="Merchandise" Relationship="StoreDBModel.FK__Consume__MerchID__24927208" FromRole="Consume" ToRole="Merchandise" />
@@ -386,11 +386,11 @@
           </Key>
           <Property Name="MemID" Type="Int32" Nullable="false" />
           <Property Name="MemName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="MemGender" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="MemGender" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
           <Property Name="MemAddr" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="MemPhoneNO" Type="Int32" />
+          <Property Name="MemPhoneNO" Type="Int64" />
           <Property Name="CardNO" Type="Int64" />
-          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="RegistrationDATE" Type="DateTime" Precision="3" />
           <Property Name="TotalAmount" Type="Decimal" Precision="10" Scale="4" />
           <NavigationProperty Name="Consumes" Relationship="StoreDBModel.FK__Consume__MemID__25869641" FromRole="Member" ToRole="Consume" />
         </EntityType>
@@ -405,8 +405,8 @@
           <Property Name="MerchPrice" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="BarCode" Type="Int64" />
           <Property Name="PromotionPrice" Type="Decimal" Precision="10" Scale="4" />
-          <Property Name="PromotionDateS" Type="DateTime" Precision="3" />
-          <Property Name="PromotionDateE" Type="DateTime" Precision="3" />
+          <Property Name="PromotionDATES" Type="DateTime" Precision="3" />
+          <Property Name="PromotionDATEE" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ChainStore" Relationship="StoreDBModel.FK__Merchandi__Store__173876EA" FromRole="Merchandise" ToRole="ChainStore" />
           <NavigationProperty Name="Consume" Relationship="StoreDBModel.FK__Consume__MerchID__24927208" FromRole="Merchandise" ToRole="Consume" />
           <NavigationProperty Name="Inventory" Relationship="StoreDBModel.FK__Inventory__Merch__20C1E124" FromRole="Merchandise" ToRole="Inventory" />
@@ -420,11 +420,11 @@
           <Property Name="StaffID" Type="Int32" Nullable="false" />
           <Property Name="StoreID" Type="Int32" Nullable="false" />
           <Property Name="StaffName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="StaffGender" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="StaffGender" Type="String" MaxLength="2" Unicode="true" FixedLength="false" />
           <Property Name="StaffAge" Type="Int32" />
           <Property Name="StaffWage" Type="Decimal" Precision="10" Scale="4" />
           <Property Name="StaffAddr" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="StaffPhoneNO" Type="Int32" />
+          <Property Name="StaffPhoneNO" Type="Int64" />
           <NavigationProperty Name="ChainStore" Relationship="StoreDBModel.FK__Staff__StoreID__1273C1CD" FromRole="Staff" ToRole="ChainStore" />
           <NavigationProperty Name="Work" Relationship="StoreDBModel.FK__Work__StaffID__1CF15040" FromRole="Staff" ToRole="Work" />
         </EntityType>
@@ -434,7 +434,7 @@
           </Key>
           <Property Name="MerchID" Type="Int32" Nullable="false" />
           <Property Name="VendorID" Type="Int32" Nullable="false" />
-          <Property Name="StockDate" Type="DateTime" Precision="3" />
+          <Property Name="StockDATE" Type="DateTime" Precision="3" />
           <Property Name="StockQuantity" Type="Int32" />
           <NavigationProperty Name="Merchandise" Relationship="StoreDBModel.FK__Stock__MerchID__286302EC" FromRole="Stock" ToRole="Merchandise" />
           <NavigationProperty Name="Vendor" Relationship="StoreDBModel.FK__Stock__VendorID__29572725" FromRole="Stock" ToRole="Vendor" />
@@ -446,7 +446,7 @@
           <Property Name="VendorID" Type="Int32" Nullable="false" />
           <Property Name="VendorName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="VendorAddr" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
-          <Property Name="VendorPhoneNO" Type="Int32" />
+          <Property Name="VendorPhoneNO" Type="Int64" />
           <NavigationProperty Name="Merchandises" Relationship="StoreDBModel.FK__Merchandi__Vendo__182C9B23" FromRole="Vendor" ToRole="Merchandise" />
           <NavigationProperty Name="Stocks" Relationship="StoreDBModel.FK__Stock__VendorID__29572725" FromRole="Vendor" ToRole="Stock" />
         </EntityType>
@@ -456,7 +456,7 @@
           </Key>
           <Property Name="StaffID" Type="Int32" Nullable="false" />
           <Property Name="StoreID" Type="Int32" Nullable="false" />
-          <Property Name="HireDate" Type="DateTime" Precision="3" />
+          <Property Name="HireDATE" Type="DateTime" Precision="3" />
           <Property Name="AwardsRecords" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <Property Name="PunishmentRecords" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="ChainStore" Relationship="StoreDBModel.FK__Work__StoreID__1DE57479" FromRole="Work" ToRole="ChainStore" />
@@ -615,7 +615,7 @@
               <MappingFragment StoreEntitySet="Consume">
                 <ScalarProperty Name="MerchID" ColumnName="MerchID" />
                 <ScalarProperty Name="MemID" ColumnName="MemID" />
-                <ScalarProperty Name="ConDate" ColumnName="ConDate" />
+                <ScalarProperty Name="ConDATE" ColumnName="ConDATE" />
                 <ScalarProperty Name="ConAmount" ColumnName="ConAmount" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -638,7 +638,7 @@
                 <ScalarProperty Name="MemAddr" ColumnName="MemAddr" />
                 <ScalarProperty Name="MemPhoneNO" ColumnName="MemPhoneNO" />
                 <ScalarProperty Name="CardNO" ColumnName="CardNO" />
-                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="RegistrationDATE" ColumnName="RegistrationDATE" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -653,8 +653,8 @@
                 <ScalarProperty Name="MerchPrice" ColumnName="MerchPrice" />
                 <ScalarProperty Name="BarCode" ColumnName="BarCode" />
                 <ScalarProperty Name="PromotionPrice" ColumnName="PromotionPrice" />
-                <ScalarProperty Name="PromotionDateS" ColumnName="PromotionDateS" />
-                <ScalarProperty Name="PromotionDateE" ColumnName="PromotionDateE" />
+                <ScalarProperty Name="PromotionDATES" ColumnName="PromotionDATES" />
+                <ScalarProperty Name="PromotionDATEE" ColumnName="PromotionDATEE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -677,7 +677,7 @@
               <MappingFragment StoreEntitySet="Stock">
                 <ScalarProperty Name="MerchID" ColumnName="MerchID" />
                 <ScalarProperty Name="VendorID" ColumnName="VendorID" />
-                <ScalarProperty Name="StockDate" ColumnName="StockDate" />
+                <ScalarProperty Name="StockDATE" ColumnName="StockDATE" />
                 <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -697,7 +697,7 @@
               <MappingFragment StoreEntitySet="Work">
                 <ScalarProperty Name="StaffID" ColumnName="StaffID" />
                 <ScalarProperty Name="StoreID" ColumnName="StoreID" />
-                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="HireDATE" ColumnName="HireDATE" />
                 <ScalarProperty Name="AwardsRecords" ColumnName="AwardsRecords" />
                 <ScalarProperty Name="PunishmentRecords" ColumnName="PunishmentRecords" />
               </MappingFragment>
@@ -719,7 +719,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="默认值" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

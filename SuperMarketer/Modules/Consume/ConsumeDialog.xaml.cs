@@ -35,7 +35,7 @@ namespace SuperMarketer
                 txbMerchID.IsEnabled = false;
                 txbMerchID.Text = item.MerchID.ToString();
                 txbMemID.Text = item.MemID.ToString();
-                txbConsumeDate.SelectedDate= item.ConDate;
+                txbConsumeDate.Value = item.ConDATE;
                 txbConsumeQuantity.Text = item.ConAmount.ToString();
             }
         }
@@ -91,7 +91,8 @@ namespace SuperMarketer
             TextBox txb = sender as TextBox;
             try
             {
-                int.Parse(txb.Text);
+                //consume amount is a decimal.
+                decimal.Parse(txb.Text);
                 txb.Background = new SolidColorBrush(Colors.White);
                 txb.ToolTip = null;
             }
@@ -116,22 +117,23 @@ namespace SuperMarketer
             //create a query in order to execute in findmode.
             if (isFindMode)
             {
-                int parseMerchID, parseVenderID, parseConsumeQuantity;
+                int parseMerchID, parseVenderID;
+                decimal parseConsumeQuantity;
                 DateTime? parseConsumeDate;
                 bool bMerchID, bVenderID, bConsumeQuantity;
                 //record whether parsing succeeds or not.
                 bMerchID = int.TryParse(txbMerchID.Text, out parseMerchID);
                 bVenderID = int.TryParse(txbMemID.Text, out parseVenderID);
-                parseConsumeDate = txbConsumeDate.SelectedDate;
+                parseConsumeDate = txbConsumeDate.Value;
                 //bConsumeDate = int.TryParse(txbConsumeDate.Text, out parseConsumeDate);
-                bConsumeQuantity = int.TryParse(txbConsumeQuantity.Text, out parseConsumeQuantity);
+                bConsumeQuantity = decimal.TryParse(txbConsumeQuantity.Text, out parseConsumeQuantity);
 
                 //create query. note the use of (p?a:b) expressions. 
                 //if parsing failed, ignore that predicate(in other words, (&& true)).
                 var query = from Consume in db.Consumes
                             where (bMerchID ? Consume.MerchID == parseMerchID : true)
                             && (bVenderID ? Consume.MemID == parseVenderID : true)
-                            && (parseConsumeDate != null ? Consume.ConDate == parseConsumeDate : true)
+                            && (parseConsumeDate != null ? Consume.ConDATE == parseConsumeDate : true)
                             && (bConsumeQuantity ? Consume.ConAmount == parseConsumeQuantity : true)
                             select Consume;
 
@@ -148,15 +150,15 @@ namespace SuperMarketer
                     //parse and create prototype item.
                     int parseMerchID = int.Parse(txbMerchID.Text);
                     int parseVenderID = int.Parse(txbMemID.Text);
-                    int parseConsumeQuantity = int.Parse(txbConsumeQuantity.Text);
-                    DateTime? parseConsumeDate = txbConsumeDate.SelectedDate;
+                    decimal parseConsumeQuantity = decimal.Parse(txbConsumeQuantity.Text);
+                    DateTime? parseConsumeDate = txbConsumeDate.Value;
 
                     Consume item = new Consume()
                     {
                         MerchID = parseMerchID,
                         MemID = parseVenderID,
                         ConAmount = parseConsumeQuantity,
-                        ConDate = parseConsumeDate,
+                        ConDATE = parseConsumeDate,
                     };
 
                     //save into app properties.

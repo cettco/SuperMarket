@@ -23,6 +23,8 @@ namespace SuperMarketer
         public MainWindow()
         {
             InitializeComponent();
+            this.ResizeMode = System.Windows.ResizeMode.NoResize;
+            
         }
 
         private void btnStore_Click(object sender, RoutedEventArgs e)

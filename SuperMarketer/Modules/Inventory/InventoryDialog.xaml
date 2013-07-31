@@ -1,8 +1,28 @@
 ﻿<Window x:Class="SuperMarketer.InventoryDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="InventoryDialog" Height="300" Width="300">
+        Title="库存信息" Height="250" Width="300" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="54*"/>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="55*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="31"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="商品编号：" Grid.Column="0" Grid.Row="0" FontSize="16"></Label>
+        <Label Content="存货商店编号：" Grid.Column="0" Grid.Row="1" FontSize="16"></Label>
+        <Label Content="库存商品数量：" Grid.Column="0" Grid.Row="2" FontSize="16"></Label>
+        <TextBox Name="txbMerchID" Grid.Column="1" Grid.Row="0" Margin="1,4,0,8" Width="140" LostFocus="txbMerchID_LostFocus"/>
+        <TextBox Name="txbStoreID" MaxLength="300" Grid.Column="1" Grid.Row="1" Margin="1,4,0,8" Width="140" LostFocus="txbStoreID_LostFocus"/>
+        <TextBox Name="txbInvenQuantity" Grid.Column="1" Grid.Row="2" Margin="1,4,0,8" Width="140" LostFocus="txbInvenQuantity_LostFocus"/>
+        <Separator Grid.Row="3" Grid.ColumnSpan="2"></Separator>
+        <Button Name="btnCancel" Content="取消" Grid.Column="0" Grid.Row="4" Click="btnCancel_Click"></Button>
+        <Button Name="btnSubmit" Content="提交" Grid.Column="1" Grid.Row="4" Click="btnSubmit_Click"></Button>
     </Grid>
 </Window>
